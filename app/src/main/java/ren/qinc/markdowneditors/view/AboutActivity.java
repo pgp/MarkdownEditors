@@ -18,19 +18,13 @@ package ren.qinc.markdowneditors.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.TextView;
 
-import butterknife.Bind;
-import butterknife.OnClick;
-import ren.qinc.markdowneditors.AppContext;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseToolbarActivity;
-import ren.qinc.markdowneditors.base.BaseWebActivity;
 import ren.qinc.markdowneditors.utils.SystemBarUtils;
 import ren.qinc.markdowneditors.utils.SystemUtils;
 
@@ -39,9 +33,9 @@ import ren.qinc.markdowneditors.utils.SystemUtils;
  * Created by 沈钦赐 on 16/6/30.
  */
 public class AboutActivity extends BaseToolbarActivity {
-    @Bind(R.id.version)
+//    @Bind(R.id.version)
     TextView version;
-    @Bind(R.id.description)
+//    @Bind(R.id.description)
     TextView description;
     private static final String MAIL = "mailto:qq@qinc.me";
 
@@ -62,6 +56,9 @@ public class AboutActivity extends BaseToolbarActivity {
 
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
+        version = (TextView)findViewById(R.id.version);
+        description = (TextView)findViewById(R.id.description);
+
         version.setText(String.format(getString(R.string.version_string), SystemUtils.getAppVersion(mContext)));
         String fromAssets = SystemUtils.getAssertString(mContext.getApplicationContext(), "description.txt");
         if (TextUtils.isEmpty(fromAssets)) {
@@ -83,8 +80,8 @@ public class AboutActivity extends BaseToolbarActivity {
     }
 
 
-    @OnClick({R.id.contact_me, R.id.ad_contact_me})
-    protected void contackMe(View v) {
+    /*@OnClick({R.id.contact_me, R.id.ad_contact_me})
+    protected void contactMe(View v) {
         String subject = null;
         switch (v.getId()) {
             case R.id.ad_contact_me:
@@ -105,13 +102,13 @@ public class AboutActivity extends BaseToolbarActivity {
         } catch (Exception e) {
             AppContext.showSnackbar(getWindow().getDecorView(), "找不到邮箱应用!");
         }
-    }
+    }*/
 
 
-    @OnClick(R.id.about_github)
-    protected void openSource() {
-        BaseWebActivity.loadUrl(this, "https://github.com/qinci/MarkdownEditors", "源码地址");
-    }
+//    @OnClick(R.id.about_github)
+//    protected void openSource() {
+//        BaseWebActivity.loadUrl(this, "https://github.com/qinci/MarkdownEditors", "源码地址");
+//    }
 
     @NonNull
     @Override

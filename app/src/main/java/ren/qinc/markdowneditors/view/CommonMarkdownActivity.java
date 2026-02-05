@@ -23,7 +23,6 @@ import android.support.annotation.NonNull;
 
 import java.io.InputStream;
 
-import butterknife.Bind;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseToolbarActivity;
 import ren.qinc.markdowneditors.utils.Check;
@@ -38,7 +37,7 @@ import ren.qinc.markdowneditors.widget.MarkdownPreviewView;
 public class CommonMarkdownActivity extends BaseToolbarActivity implements MarkdownPreviewView.OnLoadingFinishListener {
     private static final String CONTENT = "CONTENT";
     private static final String TITLE = "TITLE";
-    @Bind(R.id.markdownView)
+//    @Bind(R.id.markdownView)
     protected MarkdownPreviewView mMarkdownPreviewView;
     private String mTitle;
     private String mContent;
@@ -67,6 +66,8 @@ public class CommonMarkdownActivity extends BaseToolbarActivity implements Markd
 
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
+        mMarkdownPreviewView = (MarkdownPreviewView)findViewById(R.id.markdownView);
+
         mTitle = getIntent().getStringExtra(TITLE);
         mContent = getIntent().getStringExtra(CONTENT);
         Check.CheckNull(mTitle, "标题不能为空");

@@ -27,7 +27,6 @@ import android.view.ViewGroup;
 
 import com.squareup.leakcanary.RefWatcher;
 
-import butterknife.ButterKnife;
 import ren.qinc.markdowneditors.BuildConfig;
 import ren.qinc.markdowneditors.event.RxEvent;
 import ren.qinc.markdowneditors.event.RxEventBus;
@@ -53,7 +52,7 @@ public abstract class BaseFragment extends BaseStatedFragment implements BaseVie
                 throw new IllegalStateException(this.getClass().getSimpleName() + ":LayoutID找不到对应的布局");
 
         }
-        ButterKnife.bind(this, rootView);
+//        ButterKnife.bind(this, rootView);
         registerEvent();
         return rootView;
     }
@@ -77,7 +76,7 @@ public abstract class BaseFragment extends BaseStatedFragment implements BaseVie
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(rootView);
+//        ButterKnife.unbind(rootView);
         //注销EventBus
         unregisterEvent();
         mContext = null;

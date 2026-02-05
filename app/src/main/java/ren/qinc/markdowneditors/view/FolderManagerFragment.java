@@ -41,8 +41,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.OnClick;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.adapter.FileListAdapter;
 import ren.qinc.markdowneditors.adapter.OnItemClickLitener;
@@ -63,13 +61,13 @@ import ren.qinc.markdowneditors.widget.TabView;
  */
 public class FolderManagerFragment extends BaseRefreshFragment implements IFolderManagerView, View.OnClickListener, OnItemClickLitener {
 
-    @Bind(R.id.content_view)
+//    @Bind(R.id.content_view)
     protected RecyclerView mfileList;
-    @Bind(R.id.tab_view)
+//    @Bind(R.id.tab_view)
     protected TabView mTabView;
-    @Bind(R.id.noContent)
+//    @Bind(R.id.noContent)
     protected View noContent;
-    @Bind(R.id.fab)
+//    @Bind(R.id.fab)
     protected FloatingActionButton mActionButton;
 
     private FolderManagerPresenter mPresenter;
@@ -84,6 +82,14 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     private ActionMode.Callback pasteModeCallback;
     //文件编辑模式ActionMode
     private ActionMode.Callback editModeCallback;
+
+    public void init1() {
+        mfileList = (RecyclerView)getActivity().findViewById(R.id.content_view);
+        mTabView = (TabView)getActivity().findViewById(R.id.tab_view);
+        noContent = getActivity().findViewById(R.id.noContent);
+        mActionButton = (FloatingActionButton)getActivity().findViewById(R.id.fab);
+        mActionButton.setOnClickListener(this::newNote);
+    }
 
     @Override
     public void onDestroyView() {
@@ -106,6 +112,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
         super.onCreateAfter(savedInstanceState);
+        init1();
         initActionMode();
         //初始化Presenter
         mPresenter = new FolderManagerPresenter(files);
@@ -398,7 +405,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     }
 
-    @OnClick(R.id.fab)
+//    @OnClick(R.id.fab)
     public void newNote(View v) {
         Intent intent = new Intent(mContext, EditorActivity.class);
         intent.setAction(Intent.ACTION_VIEW);

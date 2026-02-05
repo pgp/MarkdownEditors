@@ -36,7 +36,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import butterknife.Bind;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseToolbarActivity;
 
@@ -53,7 +52,7 @@ public class CommonImageDetailsActivity extends BaseToolbarActivity {
     public static final String TRANSIT_PIC = "picture";
 
     protected static ImageView imageView;
-    @Bind(R.id.tv_title)
+//    @Bind(R.id.tv_title)
     protected TextSwitcher textSwitcher;
 
     String imageUrl, title;
@@ -123,6 +122,8 @@ public class CommonImageDetailsActivity extends BaseToolbarActivity {
 
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
+        textSwitcher = (TextSwitcher)findViewById(R.id.tv_title);
+
         imageView = (ImageView) findViewById(R.id.picture);
         imageView.setOnClickListener(this::switchover);
 

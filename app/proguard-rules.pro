@@ -62,18 +62,18 @@
 #注解框架butterknife
 # https://github.com/JakeWharton/butterknife
 # http://jakewharton.github.io/butterknife/
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
+#-keep class butterknife.** { *; }
+#-dontwarn butterknife.internal.**
+#-keep class **$$ViewBinder { *; }
+#-keepclasseswithmembernames class * {
+#    @butterknife.* <fields>;
+#}
+#-keepclasseswithmembernames class * {
+#    @butterknife.* <methods>;
+#}
 #google
--dontwarn com.google.**
--keep class com.google.** { *; }
+#-dontwarn com.google.**
+#-keep class com.google.** { *; }
 
 #BottomSheet
 -dontwarn de.mrapp.android.**

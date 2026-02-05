@@ -19,7 +19,6 @@ package ren.qinc.markdowneditors.base;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import butterknife.Bind;
 import ren.qinc.markdowneditors.R;
 
 /**
@@ -28,7 +27,7 @@ import ren.qinc.markdowneditors.R;
  */
 public abstract class BaseRefreshFragment extends BaseFragment {
 
-    @Bind(R.id.id_refresh)
+//    @Bind(R.id.id_refresh)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
 
     public SwipeRefreshLayout getSwipeRefreshLayout() {
@@ -43,6 +42,7 @@ public abstract class BaseRefreshFragment extends BaseFragment {
 
 
     private void initRefresh() {
+        mSwipeRefreshLayout = (SwipeRefreshLayout)getActivity().findViewById(R.id.id_refresh);
         if (mSwipeRefreshLayout == null) {
             throw new IllegalStateException(this.getClass().getSimpleName() + ":要使用BaseRefreshFragment，必须在布局里面增加id为‘id_refresh’的MaterialRefreshLayout");
         }

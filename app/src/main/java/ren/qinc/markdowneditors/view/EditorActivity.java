@@ -39,7 +39,6 @@ import android.widget.EditText;
 
 import java.io.File;
 
-import butterknife.Bind;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseApplication;
 import ren.qinc.markdowneditors.base.BaseToolbarActivity;
@@ -66,9 +65,9 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
     private String mName;
     private String currentFilePath;
 
-    @Bind(R.id.action_other_operate)
+//    @Bind(R.id.action_other_operate)
     protected ExpandableLinearLayout mExpandLayout;
-    @Bind(R.id.pager)
+//    @Bind(R.id.pager)
     protected ViewPager mViewPager;
     private TabIconView mTabIconView;
 
@@ -79,6 +78,9 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
+        mExpandLayout = (ExpandableLinearLayout)findViewById(R.id.action_other_operate);
+        mViewPager = (ViewPager)findViewById(R.id.pager);
+
         ViewCompat.setTransitionName(mViewPager, SHARED_ELEMENT_NAME);
 //        ViewCompat.setTransitionName(mViewPager, SHARED_ELEMENT_COLOR_NAME);
 //        mExpandLayout = (ExpandableLinearLayout) getLayoutInflater().inflate(R.layout.view_edit_operate, getAppBar(), false);

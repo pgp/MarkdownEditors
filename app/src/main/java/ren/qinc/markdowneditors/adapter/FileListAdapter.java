@@ -28,8 +28,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseApplication;
 import ren.qinc.markdowneditors.entity.FileBean;
@@ -167,20 +165,25 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
 
     class FileViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.file_name)
+//        @Bind(R.id.file_name)
         TextView name;
-        @Bind(R.id.file_size)
+//        @Bind(R.id.file_size)
         TextView fileSize;
-        @Bind(R.id.file_time)
+//        @Bind(R.id.file_time)
         TextView fileTime;
-        @Bind(R.id.file_icon)
+//        @Bind(R.id.file_icon)
         ImageView fileIcon;
-        @Bind(R.id.divider)
+//        @Bind(R.id.divider)
         View divider;
 
         public FileViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+//            ButterKnife.bind(this, itemView);
+            name = (TextView)itemView.findViewById(R.id.file_name);
+            fileSize = (TextView)itemView.findViewById(R.id.file_size);
+            fileTime = (TextView)itemView.findViewById(R.id.file_time);
+            fileIcon = (ImageView)itemView.findViewById(R.id.file_icon);
+            divider = itemView.findViewById(R.id.divider);
         }
     }
 

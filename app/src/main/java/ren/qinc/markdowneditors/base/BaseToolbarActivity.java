@@ -29,7 +29,6 @@ import android.view.animation.DecelerateInterpolator;
 
 import java.lang.reflect.Method;
 
-import butterknife.Bind;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.utils.Check;
 import ren.qinc.markdowneditors.utils.ViewUtils;
@@ -40,14 +39,16 @@ import ren.qinc.markdowneditors.utils.ViewUtils;
  * Created by 沈钦赐 on 16/1/25.
  */
 public abstract class BaseToolbarActivity extends BaseActivity {
-    @Bind(R.id.id_toolbar)
+//    @Bind(R.id.id_toolbar)
     protected Toolbar mToolbar;
-    @Bind(R.id.id_appbar)
+//    @Bind(R.id.id_appbar)
     protected AppBarLayout mAppBar;
 
     @Override
     protected void init() {
         super.init();
+        mToolbar = (Toolbar)findViewById(R.id.id_toolbar);
+        mAppBar = (AppBarLayout)findViewById(R.id.id_appbar);
         if (mToolbar == null) // 如果布局文件没有找到toolbar,则不设置actionbar
         {
             throw new IllegalStateException(this.getClass().getSimpleName() + ":要使用BaseToolbarActivity，必须在布局里面增加id为‘id_toolbar’的Toolbar");

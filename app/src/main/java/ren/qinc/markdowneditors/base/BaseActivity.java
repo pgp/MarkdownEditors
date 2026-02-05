@@ -43,7 +43,6 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.lang.reflect.Field;
 
-import butterknife.ButterKnife;
 import ren.qinc.markdowneditors.AppManager;
 import ren.qinc.markdowneditors.event.RxEvent;
 import ren.qinc.markdowneditors.event.RxEventBus;
@@ -73,14 +72,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 //            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
 //            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
 //        }
-        if (isNeedLogin()) {//如果子类返回true,代表当前界面需要登录才能进去
-            finish();
-        }
         registerEvent();
 
         if (getLayoutId() != 0) {// 设置布局,如果子类有返回布局的话
             setContentView(getLayoutId());
-            ButterKnife.bind(this);
+//            ButterKnife.bind(this);
         } else {
             //没有提供ViewId
             throw new IllegalStateException(this.getClass().getSimpleName() + "没有提供正确的LayoutId");
@@ -103,7 +99,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         unregisterEvent();
         //移除任务栈
         AppManager.getAppManager().removeActivity(this);
-        ButterKnife.unbind(this);//解绑定
+//        ButterKnife.unbind(this);//解绑定
         super.onDestroy();
     }
 
@@ -170,22 +166,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void initStatusBar() {
         SystemBarUtils.tintStatusBar(this, 0);
     }
-
-    /**
-     * 当前界面是否需要登录才能进去,默认不需要登录
-     *
-     * @return 返回true代表当前界面需要登录才能进入
-     */
-    protected boolean isNeedLogin() {
-        return false;
-    }
-
-    /**
-     * On login.登陆逻辑留给子类,
-     */
-    protected void onLogin() {
-    }
-
 
     @Override
     public void hideWaitDialog() {
