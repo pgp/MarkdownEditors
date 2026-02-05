@@ -125,21 +125,18 @@
 #如果引用了v4或者v7包
 -dontwarn android.support.**
 
-#忽略警告
--ignorewarning
-
 ##记录生成的日志数据,gradle build时在本项目根目录输出##
 
 
 #apk 包内所有 class 的内部结构
 -dump class_files.txt
 #未混淆的类和成员
--printseeds seeds.txt
+#-printseeds seeds.txt
 #列出从 apk 中删除的代码
--printusage unused.txt
+#-printusage unused.txt
 #混淆前后的映射
 -verbose
--printmapping mapping.txt
+#-printmapping mapping.txt
 
 #避免混淆泛型 如果混淆报错建议关掉
 -keepattributes Signature
