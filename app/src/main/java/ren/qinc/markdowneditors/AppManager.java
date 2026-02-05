@@ -18,8 +18,6 @@ package ren.qinc.markdowneditors;
 import android.app.Activity;
 import android.content.Context;
 
-import com.umeng.analytics.MobclickAgent;
-
 import java.util.Stack;
 
 import ren.qinc.markdowneditors.base.BaseApplication;
@@ -176,13 +174,12 @@ public class AppManager {
      */
     public void AppExit(Context context) {
         try {
-            MobclickAgent.onKillProcess(BaseApplication.context());
             finishAllActivity();
-            // 杀死该应用进程
+            
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(0);
         } catch (Exception e) {
-            MobclickAgent.reportError(BaseApplication.context(), e);
+            e.printStackTrace();
         }
     }
 

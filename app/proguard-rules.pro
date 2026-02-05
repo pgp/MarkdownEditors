@@ -35,12 +35,6 @@
     public <init>(android.content.Context, android.util.AttributeSet);
 }
 
-#蒲公英
-#-libraryjars libs/pgyer_sdk_2.2.2.jar
--dontwarn com.pgyersdk.**
--keep class com.pgyersdk.** { *; }
-
-
 #View的构造函数
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
@@ -91,10 +85,6 @@
     **[] $VALUES;
     public *;
 }
-
-#友盟
--dontwarn com.umeng.analytics.**
--keep class com.umeng.analytics.** { *; }
 
 #LeakCanary内存检测
 -keep class org.eclipse.mat.** { *; }

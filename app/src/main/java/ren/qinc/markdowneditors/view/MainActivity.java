@@ -22,10 +22,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.pgyersdk.javabean.AppBean;
-import com.pgyersdk.update.PgyUpdateManager;
-import com.pgyersdk.update.UpdateManagerListener;
-
 import ren.qinc.markdowneditors.AppContext;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseDrawerLayoutActivity;
@@ -63,8 +59,6 @@ public class MainActivity extends BaseDrawerLayoutActivity {
         if (savedInstanceState == null) {
             setDefaultFragment(R.id.content_fragment_container);
         }
-
-        initUpdate(false);
     }
 
     private void setDefaultFragment(@IdRes int fragmentId) {
@@ -121,7 +115,7 @@ public class MainActivity extends BaseDrawerLayoutActivity {
 //            case R.id.menu_setting:
 //                return true;
             case R.id.menu_update:
-                initUpdate(true);
+                AppContext.showSnackbar(getWindow().getDecorView(), "initUpdate logic has been removed");
                 return true;
             case R.id.other:
                 AppContext.showSnackbar(getWindow().getDecorView(), "敬请期待");
@@ -151,58 +145,4 @@ public class MainActivity extends BaseDrawerLayoutActivity {
             Toast.showShort(mContext, "再按一次退出软件");
         }
     }
-
-
-    private void initUpdate(boolean isShow) {
-        PgyUpdateManager.register(MainActivity.this,
-                new UpdateManagerListener() {
-                    @Override
-                    public void onUpdateAvailable(final String result) {
-                        final AppBean appBean = getAppBeanFromString(result);
-                        if (appBean.getReleaseNote().startsWith("####")) {
-//                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
-//                            builder
-//                                    .setTitle("当前版本已经停用了")
-//                                    .setCancelable(false)
-//                                    .setMessage("更新到最新版?")
-//                                    .setNegativeButton("取消", (dialog, which) -> {
-//                                       finish();
-//                                    })
-//                                    .setPositiveButton("确定", (dialog1, which) -> {
-//                                        startDownloadTask(
-//                                                MainActivity.this,
-//                                                appBean.getDownloadURL());
-//                                        dialog1.dismiss();
-//                                    }).show();
-                            //强制更新
-                            startDownloadTask(
-                                    MainActivity.this,
-                                    appBean.getDownloadURL());
-                        } else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
-                            builder
-                                    .setTitle("更新")
-                                    .setMessage(appBean.getReleaseNote() + "")
-                                    .setNegativeButton("先不更新", (dialog, which) -> {
-                                        dialog.dismiss();
-                                    })
-                                    .setPositiveButton("更新", (dialog1, which) -> {
-                                        startDownloadTask(
-                                                MainActivity.this,
-                                                appBean.getDownloadURL());
-                                        dialog1.dismiss();
-                                    }).show();
-
-                        }
-                    }
-
-                    @Override
-                    public void onNoUpdateAvailable() {
-                        if (isShow) {
-                            android.widget.Toast.makeText(application, "已经是最新版", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
 }

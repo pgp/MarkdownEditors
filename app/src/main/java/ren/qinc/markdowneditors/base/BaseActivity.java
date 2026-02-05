@@ -40,7 +40,6 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
-import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
 
@@ -96,23 +95,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //友盟统计
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-        MobclickAgent.onResume(getApplicationContext());
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //友盟统计
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-        MobclickAgent.onPause(getApplicationContext());
-
     }
 
     @Override
