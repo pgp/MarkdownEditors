@@ -79,37 +79,6 @@ public class AboutActivity extends BaseToolbarActivity {
 
     }
 
-
-    /*@OnClick({R.id.contact_me, R.id.ad_contact_me})
-    protected void contactMe(View v) {
-        String subject = null;
-        switch (v.getId()) {
-            case R.id.ad_contact_me:
-                subject = "广告联系";
-                break;
-            default:
-                subject = "MarkdownEditor用户";
-                break;
-        }
-
-        Uri uri = Uri.parse(MAIL);
-        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-        //intent.putExtra(Intent.EXTRA_CC, email); // 抄送人
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject); // 主题
-        // intent.putExtra(Intent.EXTRA_TEXT, "这是邮件的正文部分"); // 正文
-        try {
-            startActivity(intent);
-        } catch (Exception e) {
-            AppContext.showSnackbar(getWindow().getDecorView(), "找不到邮箱应用!");
-        }
-    }*/
-
-
-//    @OnClick(R.id.about_github)
-//    protected void openSource() {
-//        BaseWebActivity.loadUrl(this, "https://github.com/qinci/MarkdownEditors", "源码地址");
-//    }
-
     @NonNull
     @Override
     protected String getTitleString() {

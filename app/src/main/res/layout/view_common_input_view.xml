@@ -38,7 +38,7 @@
             android:text=""
             style="@style/DialogTheme"
             android:layout_height="wrap_content"
-            android:hint="请输入"/>
+            android:hint="Input"/>
     </android.support.design.widget.TextInputLayout>
 
     <RelativeLayout
@@ -62,7 +62,7 @@
             android:layout_marginRight="5dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="取消"
+            android:text="@string/action_cancel"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"/>
 
@@ -77,7 +77,7 @@
             android:paddingRight="12dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="确定"
+            android:text="OK"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             android:visibility="visible"/>

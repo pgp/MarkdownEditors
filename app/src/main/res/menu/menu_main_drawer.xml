@@ -37,40 +37,40 @@
     <!--android:title="Tools" />-->
     <!--</group>-->
 
-    <item android:checkableBehavior="single" android:title="存储">
+    <item android:checkableBehavior="single" android:title="Storage">
         <menu>
             <item
                 android:id="@+id/localhost"
                 android:checkable="true"
                 android:icon="@drawable/ic_phone"
-                android:title="本地"/>
-            <item
-                android:id="@+id/other"
-                android:checkable="false"
-                android:icon="@drawable/ic_dropbox"
-                android:title="其他"/>
+                android:title="Local"/>
+<!--            <item-->
+<!--                android:id="@+id/other"-->
+<!--                android:checkable="false"-->
+<!--                android:icon="@drawable/ic_dropbox"-->
+<!--                android:title="Dropbox"/>-->
         </menu>
     </item>
-    <item android:title="其他">
+    <item android:title="Misc">
         <menu>
             <item
                 android:id="@+id/menu_helper"
                 android:icon="@drawable/ic_help"
-                android:title="参考语法"/>
+                android:title="@string/help"/>
             <!--<item-->
                 <!--android:id="@+id/menu_setting"-->
                 <!--android:icon="@drawable/ic_settings"-->
                 <!--android:title="设置"/>-->
             <item
-                android:id="@+id/menu_update"
+                android:id="@+id/menu_setting"
                 android:icon="@drawable/ic_settings"
-                android:title="检测更新"/>
+                android:title="@string/action_setting"/>
             <!--<item-->
             <!--android:icon="@drawable/ic_message"-->
             <!--android:title="反馈" />-->
             <item android:id="@+id/menu_about"
                   android:icon="@drawable/ic_information"
-                  android:title="关于"/>
+                  android:title="@string/about"/>
         </menu>
     </item>
 

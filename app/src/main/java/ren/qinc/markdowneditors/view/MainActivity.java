@@ -112,14 +112,14 @@ public class MainActivity extends BaseDrawerLayoutActivity {
             case R.id.menu_about:
                 AboutActivity.startAboutActivity(this);
                 return true;
-//            case R.id.menu_setting:
+            case R.id.menu_setting:
+                return true;
+//            case R.id.menu_update:
+//                AppContext.showSnackbar(getWindow().getDecorView(), "initUpdate logic has been removed");
 //                return true;
-            case R.id.menu_update:
-                AppContext.showSnackbar(getWindow().getDecorView(), "initUpdate logic has been removed");
-                return true;
-            case R.id.other:
-                AppContext.showSnackbar(getWindow().getDecorView(), "敬请期待");
-                return true;
+//            case R.id.other:
+//                AppContext.showSnackbar(getWindow().getDecorView(), "敬请期待");
+//                return true;
         }
         return super.onOptionsItemSelected(item);// || mCurrentFragment.onOptionsItemSelected(item);
     }
@@ -142,7 +142,7 @@ public class MainActivity extends BaseDrawerLayoutActivity {
             finish();
         } else {// 提示用户退出
             customTime = System.currentTimeMillis();
-            Toast.showShort(mContext, "再按一次退出软件");
+            Toast.showShort(mContext, "Press once more to exit");
         }
     }
 }

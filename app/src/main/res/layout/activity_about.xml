@@ -71,66 +71,15 @@
                 android:layout_height="@dimen/space_05"
                 android:background="@color/c_e1e1e1"/>
             <!-- ================= -->
-            <TextView
-                android:id="@+id/ad_contact_me"
-                style="@style/about_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawablePadding="8dp"
-                android:text="@string/advertise_with_us"/>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_05"
                 android:background="@color/c_e1e1e1"/>
 
-            <TextView
-                style="@style/about_goup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/space_8"
-                android:text="@string/connect_with_us"/>
-
-            <TextView
-                android:id="@+id/contact_me"
-                style="@style/about_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawableLeft="@drawable/about_icon_email"
-                android:drawablePadding="8dp"
-                android:text="@string/contact_me"/>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_05"
                 android:background="@color/c_e1e1e1"/>
-
-            <!--<TextView-->
-                <!--android:id="@+id/about_link"-->
-                <!--style="@style/about_item"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="?android:attr/selectableItemBackground"-->
-                <!--android:drawableLeft="@drawable/about_icon_link"-->
-                <!--android:drawablePadding="8dp"-->
-                <!--android:text="访问我们的网站"/>-->
-
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/space_05"-->
-                <!--android:background="@color/c_e1e1e1"/>-->
-
-            <TextView
-                android:id="@+id/about_github"
-                style="@style/about_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawableLeft="@drawable/about_icon_github"
-                android:drawablePadding="8dp"
-                android:text="项目开源地址"/>
 
             <View
                 android:layout_width="match_parent"

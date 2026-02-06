@@ -408,7 +408,7 @@ public class BaseWebActivity extends BaseToolbarActivity {
         @Override
         public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-            builder.setTitle("注意").setMessage(message).setPositiveButton("确定", null);
+            builder.setTitle("Warning").setMessage(message).setPositiveButton(android.R.string.yes, null);
             builder.setCancelable(false);
             AlertDialog dialog = builder.create();
             dialog.show();

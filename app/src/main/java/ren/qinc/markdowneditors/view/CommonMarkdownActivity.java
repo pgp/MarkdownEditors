@@ -70,8 +70,8 @@ public class CommonMarkdownActivity extends BaseToolbarActivity implements Markd
 
         mTitle = getIntent().getStringExtra(TITLE);
         mContent = getIntent().getStringExtra(CONTENT);
-        Check.CheckNull(mTitle, "标题不能为空");
-        Check.CheckNull(mContent, "内容不能为空");
+        Check.CheckNull(mTitle, "Title cannot be empty");
+        Check.CheckNull(mContent, "Content cannot be empty");
         mMarkdownPreviewView.setOnLoadingFinishListener(this);
 
     }

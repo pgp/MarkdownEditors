@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,7 +91,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
         Bundle arguments = getArguments();
         String fileTemp = arguments.getString(FILE_PATH_KEY);
         if (fileTemp == null) {
-            Toast.makeText(AppContext.context(), "路径参数有误！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppContext.context(), "Invalid path parameter", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -240,11 +241,11 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
     private void shareMenu() {
         SystemUtils.hideSoftKeyboard(mContent);
         if (mName.getText().toString().isEmpty()) {
-            AppContext.showSnackbar(mContent, "当前标题为空");
+            AppContext.showSnackbar(mContent, "Current title is empty");
             return;
         }
         if (mContent.getText().toString().isEmpty()) {
-            AppContext.showSnackbar(mContent, "当前内容为空");
+            AppContext.showSnackbar(mContent, "Current content is empty");
             return;
         }
 
@@ -351,17 +352,10 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
 
     private void onNoSave() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogTheme);
-        builder.setMessage("当前文件未保存，是否退出?");
-        builder.setNegativeButton("不保存", (dialog, which) -> {
-            getActivity().finish();
-
-        }).setNeutralButton("取消", (dialog, which) -> {
-            dialog.dismiss();
-
-        }).setPositiveButton("保存", (dialog, which) -> {
-            mPresenter.saveForExit(mName.getText().toString().trim(), mContent.getText().toString().trim(), true);
-
-        }).show();
+        builder.setMessage("Exit without saving?");
+        builder.setNegativeButton("Don't save", (dialog, which) -> getActivity().finish())
+                .setNeutralButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("Save", (dialog, which) -> mPresenter.saveForExit(mName.getText().toString().trim(), mContent.getText().toString().trim(), true)).show();
     }
 
     @Override

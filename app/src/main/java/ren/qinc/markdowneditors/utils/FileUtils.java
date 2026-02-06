@@ -346,7 +346,7 @@ public class FileUtils {
     public static boolean copyFolder(@NonNull File oldFile, @NonNull File newPath) {
         if (oldFile.isFile())//如果是文件，直接复制
             return copyFile(oldFile, new File(newPath, oldFile.getName()));
-        try {//文件夹
+        try {//Folder
             newPath.mkdirs(); //如果文件夹不存在 则建立新文件夹
             File[] temps = oldFile.listFiles();
             File temp;

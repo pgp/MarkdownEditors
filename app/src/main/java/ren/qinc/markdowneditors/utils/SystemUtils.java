@@ -132,7 +132,7 @@ public class SystemUtils {
         try {
             packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
         } catch (NameNotFoundException e) {
-            return "未知";
+            return "Unknown";
         }
         return packInfo.versionName;
     }
@@ -238,11 +238,11 @@ public class SystemUtils {
      * @throws Exception the exception
      */
     public static String getPhoneMsg(Context context) throws Exception {
-        return "手机型号: " + Build.MODEL + ",\nSDK版本:"
-                + Build.VERSION.SDK + ",\n系统版本:"
+        return "Smartphone model: " + Build.MODEL + ",\nSDK version:"
+                + Build.VERSION.SDK + ",\nSystem Version:"
                 + Build.VERSION.RELEASE +
-                ",软件版本:" + getAppVersion(context) +
-                ",软件版本号:" + getAppVersionCode(context);
+                ",Software Version:" + getAppVersion(context) +
+                ",Software Version Number:" + getAppVersionCode(context);
 
     }
 
@@ -285,7 +285,7 @@ public class SystemUtils {
             x = Integer.parseInt(field.get(obj).toString());
             barHeight = BaseApplication.context().getResources().getDimensionPixelSize(x);
         } catch (Exception e1) {
-            Log.i("test", "状态栏高度获取失败了");
+            Log.i("test", "Failed to retrieve status bar height");
         }
         return barHeight;
     }

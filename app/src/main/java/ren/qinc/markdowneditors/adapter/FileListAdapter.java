@@ -108,7 +108,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
 
         //图标
         if (bean.isDirectory) {
-            holder.fileSize.setText("文件夹");
+            holder.fileSize.setText("Folder");
             holder.fileIcon.setImageResource(R.drawable.ic_folder);
         } else {
             holder.fileSize.setText(UnitsUtils.getFormatSize(bean.size));

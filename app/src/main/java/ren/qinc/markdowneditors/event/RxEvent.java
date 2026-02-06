@@ -63,8 +63,6 @@ public class RxEvent {
                 .map(o -> (RxEvent) o)
                 .filter(r -> r.isType(1) || r.isType(2))//只接受type = 1和type = 2的东西
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o -> {
-                    System.out.println("收到了");
-                });
+                .subscribe(o -> System.out.println("Received"));
     }
 }

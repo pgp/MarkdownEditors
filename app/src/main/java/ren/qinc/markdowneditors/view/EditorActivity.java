@@ -341,7 +341,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
                 Uri.fromFile(new File(path));//Uri.decode(imageUri.toString())
                 mEditorFragment.getPerformEditable().perform(R.id.id_shortcut_insert_photo, Uri.fromFile(new File(path)));
             } else {
-                Toast.showShort(this, "图片处理失败");
+                Toast.showShort(this, "Processing image failed");
             }
         }
 
@@ -355,7 +355,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
         View rootView = LayoutInflater.from(this).inflate(R.layout.view_common_input_table_view, null);
 
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("插入表格")
+                .setTitle("Insert table")
                 .setView(rootView)
                 .show();
 
@@ -370,11 +370,11 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
             String columnNumberStr = columnNumber.getText().toString().trim();
 
             if (Check.isEmpty(rowNumberStr)) {
-                rowNumberHint.setError("不能为空");
+                rowNumberHint.setError("Row cannot be empty");
                 return;
             }
             if (Check.isEmpty(columnNumberStr)) {
-                columnNumberHint.setError("不能为空");
+                columnNumberHint.setError("Column cannot be empty");
                 return;
             }
 
@@ -402,7 +402,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
         View rootView = LayoutInflater.from(this).inflate(R.layout.view_common_input_link_view, null);
 
         AlertDialog dialog = new AlertDialog.Builder(this, R.style.DialogTheme)
-                .setTitle("插入链接")
+                .setTitle("Insert link")
                 .setView(rootView)
                 .show();
 
@@ -417,11 +417,11 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
             String linkStr = link.getText().toString().trim();
 
             if (Check.isEmpty(titleStr)) {
-                titleHint.setError("不能为空");
+                titleHint.setError("Title cannot be empty");
                 return;
             }
             if (Check.isEmpty(linkStr)) {
-                linkHint.setError("不能为空");
+                linkHint.setError("Link cannot be empty");
                 return;
             }
 

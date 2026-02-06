@@ -86,7 +86,7 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="8dp"
-            android:text="取消"
+            android:text="@string/action_cancel"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"/>
 
@@ -101,7 +101,7 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="8dp"
-            android:text="确定"
+            android:text="OK"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             android:visibility="visible"/>

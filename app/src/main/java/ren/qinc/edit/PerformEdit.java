@@ -42,7 +42,7 @@ public class PerformEdit {
     private boolean flag = false;
 
     public PerformEdit(@NonNull EditText editText) {
-        CheckNull(editText, "EditText不能为空");
+        CheckNull(editText, "The EditText field cannot be left blank");
         this.editable = editText.getText();
         this.editText = editText;
         editText.addTextChangedListener(new Watcher());

@@ -165,15 +165,15 @@ public abstract class BaseApplication extends Application {
     }
 
     public static Snackbar showSnackbar(@NonNull View view, @NonNull String message, @Nullable View.OnClickListener listener) {
-        return showSnackbar(view, message, Snackbar.LENGTH_SHORT, listener, "确定");
+        return showSnackbar(view, message, Snackbar.LENGTH_SHORT, listener, "Confirmed");
     }
 
     public static Snackbar showSnackbarLong(@NonNull View view, @NonNull String message, @Nullable View.OnClickListener listener) {
-        return showSnackbar(view, message, Snackbar.LENGTH_LONG, listener, "确定");
+        return showSnackbar(view, message, Snackbar.LENGTH_LONG, listener, "Confirmed");
     }
 
     public static Snackbar showSnackbarIndefinite(@NonNull View view, @NonNull String message, @Nullable View.OnClickListener listener) {
-        return showSnackbar(view, message, Snackbar.LENGTH_INDEFINITE, listener, "确定");
+        return showSnackbar(view, message, Snackbar.LENGTH_INDEFINITE, listener, "Confirmed");
     }
 
 }

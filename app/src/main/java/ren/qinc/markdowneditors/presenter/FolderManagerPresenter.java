@@ -63,12 +63,12 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
             return;
         }
         if (!currentFolder.exists()) {
-            callFailure(-1, "文件夹不存在", IFolderManagerView.CALL_GET_FILES);
+            callFailure(-1, "Folder does not exist", IFolderManagerView.CALL_GET_FILES);
             return;
         }
 
         if (!currentFolder.isDirectory()) {//不是文件夹
-            callFailure(-1, "不是文件夹", IFolderManagerView.CALL_GET_FILES);
+            callFailure(-1, "Not a folder", IFolderManagerView.CALL_GET_FILES);
             return;
         }
 
@@ -86,7 +86,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
                                        @Override
                                        public void onError(Throwable e) {
                                            mCompositeSubscription.remove(this);//任务完成
-                                           callFailure(-1, "异常", IFolderManagerView.CALL_GET_FILES);
+                                           callFailure(-1, "Error", IFolderManagerView.CALL_GET_FILES);
                                        }
 
                                        @Override
@@ -171,9 +171,9 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
             File file = new File(currentPath());
             getFileList(file);
             //这里设置tab
-            if (getMvpView() != null) getMvpView().addTab("本地");//1
+            if (getMvpView() != null) getMvpView().addTab("Local");//1
         } else {
-            callFailure(-1, "路径找不到", IFolderManagerView.CALL_GET_FILES);
+            callFailure(-1, "Path not found", IFolderManagerView.CALL_GET_FILES);
         }
     }
 
@@ -218,7 +218,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
         File path = new File(currentPath, name);
 
         if (path.exists() && path.isDirectory()) {
-            callFailure(-1, "文件夹已经存在！", IFolderManagerView.CALL_CREATE_FOLDER);
+            callFailure(-1, "Folder already exists", IFolderManagerView.CALL_CREATE_FOLDER);
             return false;
         }
 
@@ -228,7 +228,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
             refreshCurrentPath();
             return true;
         } else {
-            callFailure(-1, "创建文件夹失败！", IFolderManagerView.CALL_CREATE_FOLDER);
+            callFailure(-1, "Failed to create folder", IFolderManagerView.CALL_CREATE_FOLDER);
         }
         return false;
     }
@@ -450,7 +450,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
             for (FileBean bean : temp) {
                 if (path.contains(bean.absPath)) {
                     //当前文件夹包含在剪切文件夹里面
-                    callFailure(-1, "当前路径不能粘贴", IFolderManagerView.CALL_OTHER);
+                    callFailure(-1, "Current path cannot be pasted", IFolderManagerView.CALL_OTHER);
                     return;
                 }
             }
@@ -469,7 +469,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
                                 @Override
                                 public void onError(Throwable e) {
                                     mCompositeSubscription.remove(this);//任务完成
-                                    callFailure(-1, "粘贴错误:" + e.getMessage(), IFolderManagerView.CALL_COPY_PASTE);
+                                    callFailure(-1, "Paste error: " + e.getMessage(), IFolderManagerView.CALL_COPY_PASTE);
                                 }
 
                                 @Override
@@ -483,7 +483,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
             for (FileBean bean : temp) {
                 if (path.equals(bean.absPath)) {
                     //当前文件夹包含在剪切文件夹里面
-                    callFailure(-1, "文件已经存在", IFolderManagerView.CALL_OTHER);
+                    callFailure(-1, "File already exists", IFolderManagerView.CALL_OTHER);
                     return;
                 }
             }
@@ -501,7 +501,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
                                 @Override
                                 public void onError(Throwable e) {
                                     mCompositeSubscription.remove(this);//任务完成
-                                    callFailure(-1, "粘贴错误:" + e.getMessage(), IFolderManagerView.CALL_COPY_PASTE);
+                                    callFailure(-1, "Paste error: " + e.getMessage(), IFolderManagerView.CALL_COPY_PASTE);
                                 }
 
                                 @Override

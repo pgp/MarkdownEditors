@@ -21,8 +21,6 @@
     <string name="serverurl">test</string>
     <string name="please_enter">please input</string>
     <string name="create_folder">Create Folder</string>
-    <string name="contact_me">Contact with us</string>
-    <string name="connect_with_us">Contact with us</string>
     <string name="about">about</string>
     <string name="action_copy">copy</string>
     <string name="action_create_file">create</string>
@@ -48,7 +46,6 @@
     <string name="action_setting">setting</string>
     <string name="action_share">share</string>
     <string name="action_undo">undo</string>
-    <string name="advertise_with_us">advertise with us</string>
     <string name="file">file</string>
     <string name="menu_web_horizontal">horizontal</string>
     <string name="menu_web_vertical">vertical</string>
@@ -63,4 +60,5 @@
     <string name="app_name">Markdown Editor</string>
     <string name="copy_right">Copyright</string>
     <string name="version_string">version_string</string>
+    <string name="help">Help</string>
 </resources>

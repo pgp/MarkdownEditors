@@ -236,7 +236,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     private void pasteMode() {
         //打开粘贴模式的ActionMode
         mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(pasteModeCallback);
-        mActionMode.setTitle("请选择粘贴位置");
+        mActionMode.setTitle("Please select a location to paste");
     }
 
     @Override
@@ -287,7 +287,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         }
 
         //非编辑模式下
-        if (fileBean.isDirectory) {//文件夹
+        if (fileBean.isDirectory) {//Folder
             mPresenter.enterFolder(fileBean.absPath);
         } else {//文件
             Intent intent = new Intent(mContext, EditorActivity.class);
@@ -427,22 +427,22 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.view_common_input_view, null);
 
         AlertDialog mInputDialog = new AlertDialog.Builder(mContext)
-                .setTitle("新建文件夹")
+                .setTitle("New Folder")
                 .setView(rootView)
                 .show();
 
         TextInputLayout textInputLayout = (TextInputLayout) rootView.findViewById(R.id.inputHint);
         EditText text = (EditText) rootView.findViewById(R.id.text);
-        textInputLayout.setHint("请输入文件夹名");
+        textInputLayout.setHint("Enter folder name");
         rootView.findViewById(R.id.sure).setOnClickListener(v -> {
             String result = text.getText().toString().trim();
 
             if (Check.isEmpty(result)) {
-                textInputLayout.setError("不能为空");
+                textInputLayout.setError("Folder name cannot be empty");
                 return;
             }
             if (mPresenter.createFoloderIsExists(result)) {
-                textInputLayout.setError("文件已经存在");
+                textInputLayout.setError("A file or folder with the same name already exists");
                 return;
             }
             mPresenter.createFolder(result);
@@ -549,8 +549,8 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
 
     /**
-     * Re name.
-     * 重命名文件、文件夹
+     * Rename.
+     * 重命名文件、Folder
      */
     private void rename() {
         FileBean selectBean = mPresenter.getSelectBean();
@@ -562,7 +562,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.view_common_input_view, null);
 
         AlertDialog dialog = new AlertDialog.Builder(mContext)
-                .setTitle("重命名")
+                .setTitle("Rename")
                 .setView(rootView)
                 .show();
 
@@ -570,31 +570,31 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         EditText text = (EditText) rootView.findViewById(R.id.text);
         text.setText(selectBean.name);
         text.setSelection(0, selectBean.isDirectory ? selectBean.name.length() : selectBean.name.lastIndexOf("."));
-        textInputLayout.setHint("请输入" + (selectBean.isDirectory ? "文件夹名" : "文件名"));
+        textInputLayout.setHint("Enter " + (selectBean.isDirectory ? "folder name" : "file name"));
         rootView.findViewById(R.id.sure).setOnClickListener(v -> {
             String result = text.getText().toString().trim();
             if (!selectBean.isDirectory &&
                     !result.endsWith(".md") &&
                     !result.endsWith(".markdown") &&
                     !result.endsWith(".markd")) {
-                textInputLayout.setError("文件后缀名必须为：md|markdown|markd");
+                textInputLayout.setError("The file extension must be: md|markdown|markd");
                 return;
             }
             if (Check.isEmpty(result)) {
-                textInputLayout.setError("不能为空");
+                textInputLayout.setError("Cannot be empty");
                 return;
             }
             if (!selectBean.isDirectory && mPresenter.fileIsExists(result)) {
-                textInputLayout.setError("文件已经存在");
+                textInputLayout.setError("File already exists");
                 return;
             }
             if (selectBean.isDirectory && mPresenter.createFoloderIsExists(result)) {
-                textInputLayout.setError("文件夹已经存在");
+                textInputLayout.setError("Folder already exists");
                 return;
             }
 
             if (!mPresenter.rename(selectBean, result)) {
-                textInputLayout.setError("重命名失败了");
+                textInputLayout.setError("Error during rename");
                 return;
             }
 
@@ -621,18 +621,18 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     private void deleteFiles() {
         int selectCount = mPresenter.getSelectCount();
         if (selectCount <= 0) {
-            BaseApplication.showSnackbar(getSwipeRefreshLayout(), "请选择文件");
+            BaseApplication.showSnackbar(getSwipeRefreshLayout(), "Select a file");
             return;
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogTheme);
-        builder.setMessage(String.format("确定删除选择的%d项？", selectCount))
-                .setNegativeButton("不删", (dialog, which) -> {
+        builder.setMessage(String.format("Are you sure you want to delete the selected %d items?", selectCount))
+                .setNegativeButton(android.R.string.no, (dialog, which) -> {
                     dialog.dismiss();
                 })
-                .setPositiveButton("删除", (dialog1, which) -> {
+                .setPositiveButton(android.R.string.yes, (dialog1, which) -> {
                     if (mPresenter.delete()) {
-                        BaseApplication.showSnackbar(getSwipeRefreshLayout(), "已经删除");
+                        BaseApplication.showSnackbar(getSwipeRefreshLayout(), "Deleted");
 //                mAdapter.removeData();
                         refresh();
                     }
@@ -652,7 +652,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     private void coptFiles() {
         int selectCount = mPresenter.getSelectCount();
         if (selectCount <= 0) {
-            BaseApplication.showSnackbar(getSwipeRefreshLayout(), "请选择文件");
+            BaseApplication.showSnackbar(getSwipeRefreshLayout(), "Please select a file");
             return;
         }
 
@@ -667,7 +667,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     private void cutFiles() {
         int selectCount = mPresenter.getSelectCount();
         if (selectCount <= 0) {
-            BaseApplication.showSnackbar(getSwipeRefreshLayout(), "请选择文件");
+            BaseApplication.showSnackbar(getSwipeRefreshLayout(), "Please select a file");
             return;
         }
         mPresenter.cut();

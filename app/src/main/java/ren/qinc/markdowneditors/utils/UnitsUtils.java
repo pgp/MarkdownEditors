@@ -59,11 +59,11 @@ public class UnitsUtils {
             int inter = (int) (cal.getTimeInMillis() - time.getTime()) / 60000;
             int hour = inter / 60;
             if (inter == 0) {
-                ftime = "刚刚";
+                ftime = "Just now";
             } else if (hour == 0)
-                ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000, 1) + "分钟前";
+                ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000, 1) + " minutes ago";
             else
-                ftime = hour + "小时前";
+                ftime = hour + " hours ago";
             return ftime;
         }
 
@@ -73,15 +73,15 @@ public class UnitsUtils {
         if (days == 0) {
             int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
             if (hour == 0)
-                ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000, 1) + "分钟前";
+                ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000, 1) + " minutes ago";
             else
-                ftime = hour + "小时前";
+                ftime = hour + " hours ago";
         } else if (days == 1) {
-            ftime = "昨天";
+            ftime = "Yesterday";
         } else if (days == 2) {
-            ftime = "前天";
+            ftime = "L'altro ieri";
         } else if (days > 2 && days < 31) {
-            ftime = days + "天前";
+            ftime = days + " days ago";
         } else if (days < 365) {
             ftime = dateFormater2.get().format(time);
         }
@@ -108,27 +108,27 @@ public class UnitsUtils {
     public static String getFormatSize(double size) {
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
-            return size + "Byte";
+            return size + " Byte";
         }
 
         double megaByte = kiloByte / 1024;
         if (megaByte < 1) {
             BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
-            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + " KB";
         }
 
         double gigaByte = megaByte / 1024;
         if (gigaByte < 1) {
             BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
-            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB";
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + " MB";
         }
 
         double teraBytes = gigaByte / 1024;
         if (teraBytes < 1) {
             BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
-            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + " GB";
         }
         BigDecimal result4 = new BigDecimal(teraBytes);
-        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
+        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + " TB";
     }
 }

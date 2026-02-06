@@ -55,15 +55,15 @@ public class DataManager {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 if (file == null) {
-                    subscriber.onError(new IllegalStateException("文件获取失败：路径错误"));
+                    subscriber.onError(new IllegalStateException("Failed to retrieve the file: Incorrect path"));
                     return;
                 }
                 if (file.isDirectory()) {
-                    subscriber.onError(new IllegalStateException("文件获取失败：不是文件"));
+                    subscriber.onError(new IllegalStateException("File retrieval failed: Not a file"));
                     return;
                 }
                 if (!file.exists()) {
-                    subscriber.onError(new IllegalStateException("文件获取失败：文件不存在"));
+                    subscriber.onError(new IllegalStateException("File retrieval failed: File does not exist"));
                     return;
                 }
 
@@ -85,7 +85,7 @@ public class DataManager {
             @Override
             public void call(Subscriber<? super Boolean> subscriber) {
                 if (file == null) {
-                    subscriber.onError(new IllegalStateException("文件保存失败：路径错误"));
+                    subscriber.onError(new IllegalStateException("File save failed: Path error"));
                     return;
                 }
 
@@ -150,7 +150,7 @@ public class DataManager {
                         FileUtils.copyFolder(bean.absPath, targetPath) ? bean : null
                 )
                 .map(bean -> {
-                    if (bean == null) throw new IllegalStateException("复制失败了");
+                    if (bean == null) throw new IllegalStateException("Copy failed");
                     else return bean;
                 })
                 .map(bean -> {//新路径改变
@@ -172,7 +172,7 @@ public class DataManager {
                         FileUtils.moveFolder(bean.absPath, target) ? bean : null
                 )
                 .map(bean -> {
-                    if (bean == null) throw new IllegalStateException("剪切失败了");
+                    if (bean == null) throw new IllegalStateException("Move failed");
                     else return bean;
                 })
                 .map(bean -> {//新路径改变

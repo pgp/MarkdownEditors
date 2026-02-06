@@ -31,7 +31,7 @@ public class PerformEditable implements View.OnClickListener {
     private EditText mEditText;
 
     public PerformEditable(EditText editText) {
-        Check.CheckNull(editText, "EditText不能为空");
+        Check.CheckNull(editText, "EditText field cannot be left blank");
         this.mEditText = editText;
     }
 

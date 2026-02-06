@@ -180,7 +180,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (mWait == null)
             mWait = KProgressHUD.create(mContext)
                     .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                    .setLabel("请稍等")
+                    .setLabel("Please wait")
                     .setAnimationSpeed(2)
                     .setDimAmount(0.5f);
         else if (mWait.isShowing()) mWait.dismiss();
