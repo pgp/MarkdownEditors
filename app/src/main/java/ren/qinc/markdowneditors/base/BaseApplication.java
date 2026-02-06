@@ -26,10 +26,6 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
-
-import me.drakeet.library.CrashWoodpecker;
 import ren.qinc.markdowneditors.AppManager;
 import ren.qinc.markdowneditors.utils.Check;
 
@@ -38,48 +34,21 @@ import ren.qinc.markdowneditors.utils.Check;
  * 业务无关的Application基类
  * Created by 沈钦赐 on 16/21/25.
  */
-public abstract class BaseApplication extends Application {
+public class BaseApplication extends Application {
     static Context context;
     static Resources resource;
-
-    private RefWatcher refWatcher;
-
 
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
         resource = context.getResources();
-
-        if (hasMemoryLeak()) {
-            refWatcher = LeakCanary.install(this);//预定义的 RefWatcher，同时也会启用一个 ActivityRefWatcher
-        }
-        if (hasCrashLog()) {
-            CrashWoodpecker.fly().to(this);//崩溃异常捕获
-        }
-
     }
 
 
     public static synchronized Context context() {
         return context;
     }
-
-    public static RefWatcher getRefWatcher(Context context) {
-        if (context == null) {
-            return null;
-        }
-        BaseApplication application = (BaseApplication) context.getApplicationContext();
-        if (application.hasMemoryLeak()) {
-            return application.refWatcher;
-        }
-        return null;
-    }
-
-    protected abstract boolean hasMemoryLeak();
-
-    protected abstract boolean hasCrashLog();
-
 
     @Override
     public void onTerminate() {

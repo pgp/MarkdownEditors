@@ -86,11 +86,6 @@
     public *;
 }
 
-#LeakCanary内存检测
--keep class org.eclipse.mat.** { *; }
--keep class com.squareup.leakcanary.** { *; }
-
-
 -keep class com.loopj.** { *; }
 ####################################################
 

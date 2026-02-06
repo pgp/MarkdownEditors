@@ -25,9 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.leakcanary.RefWatcher;
-
-import ren.qinc.markdowneditors.BuildConfig;
 import ren.qinc.markdowneditors.event.RxEvent;
 import ren.qinc.markdowneditors.event.RxEventBus;
 import rx.Subscription;
@@ -52,7 +49,6 @@ public abstract class BaseFragment extends BaseStatedFragment implements BaseVie
                 throw new IllegalStateException(this.getClass().getSimpleName() + ":LayoutID找不到对应的布局");
 
         }
-//        ButterKnife.bind(this, rootView);
         registerEvent();
         return rootView;
     }
@@ -60,7 +56,6 @@ public abstract class BaseFragment extends BaseStatedFragment implements BaseVie
     @Override
     public void onResume() {
         super.onResume();
-        // MobclickAgent.onPageStart(this.getClass().getSimpleName());
         if (isFirstFocused) {
             isFirstFocused = false;
             initData();
@@ -68,38 +63,16 @@ public abstract class BaseFragment extends BaseStatedFragment implements BaseVie
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        // MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        ButterKnife.unbind(rootView);
-        //注销EventBus
         unregisterEvent();
         mContext = null;
         rootView = null;
-
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (BuildConfig.DEBUG) {//Debug的时候检查内存泄露
-            RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
-            if (refWatcher != null) {
-                refWatcher.watch(this);
-            }
-        }
     }
 
     @Override
     protected void onFirstLaunched() {
         super.onFirstLaunched();
-        //包含菜单到所在Activity
         setHasOptionsMenu(hasMenu());
         onCreateAfter(null);
     }
@@ -108,12 +81,10 @@ public abstract class BaseFragment extends BaseStatedFragment implements BaseVie
     private boolean isFirstFocused = true;
 
 
-    //用于接收事件
     private Subscription mSubscribe;
 
     @Override
     public void registerEvent() {
-        //订阅
         mSubscribe = RxEventBus.getInstance().toObserverable()
                 .filter(o -> o instanceof RxEvent)//只接受RxEvent
                 .map(o -> (RxEvent) o)

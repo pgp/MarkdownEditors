@@ -260,19 +260,18 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         mAdapter.addData(position, bean);
     }
 
-
     @Override
     public void onItemClick(View view, int position) {
         FileBean fileBean = files.get(position);
 
-        //编辑模式下，这选择文件
+        // In edit mode, this selects the file
         if (mPresenter.isEditMode() && mActionMode != null) {
             fileBean.isSelect = !fileBean.isSelect;
             mAdapter.notifyItemChanged(position);
-            //算出当前选择数量，赋值到标题
+            // Calculate the current selection count and assign it to the title
             int selectCount = mPresenter.getSelectCount();
-            //如果数量等于1，这显示重命名菜单，否则隐藏
-            //如果数量为0，这关闭编辑模式
+            // If the count equals 1, display the rename menu; otherwise, hide it
+            // If the count is 0, disable edit mode
             if (selectCount == 0) {
                 mActionMode.setTitle("");
                 mPresenter.closeEditMode();
