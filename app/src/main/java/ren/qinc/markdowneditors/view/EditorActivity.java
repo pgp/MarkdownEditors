@@ -88,7 +88,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
         getIntentData();
         mEditorFragment = EditorFragment.getInstance(currentFilePath);
-        mEditorMarkdownFragment = EditorMarkdownFragment.getInstance();
+        mEditorMarkdownFragment = EditorMarkdownFragment.getInstance(currentFilePath);
 
         initViewPager();
         initTab();
@@ -104,13 +104,13 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
             @Override
             public void onPageSelected(int position) {
                 //更新标题
-                if (position == 0)
+                if (position == 1)
                     getToolbar().setTitle("");
                 else if (mName != null)
                     getToolbar().setTitle(mName);
 
                 //刷新渲染数据
-                if (position == 1) {
+                if (position == 0) {
                     RxEventBus.getInstance().send(new RxEvent(RxEvent.TYPE_REFRESH_NOTIFY));
                 }
             }
@@ -208,7 +208,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
+            if (position == 1) {
                 return mEditorFragment;
             }
             return mEditorMarkdownFragment;

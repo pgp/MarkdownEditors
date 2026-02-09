@@ -472,4 +472,9 @@ public class FileUtils {
         return data;
     }
 
+    public static String fileNameNoExt(File f) {
+        String n = f.getName();
+        int lastDot = n.lastIndexOf('.');
+        return (lastDot > 0) ? n.substring(0, lastDot) : n;
+    }
 }

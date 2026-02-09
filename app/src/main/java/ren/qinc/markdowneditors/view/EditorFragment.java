@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,7 +55,7 @@ import ren.qinc.markdowneditors.utils.SystemUtils;
 public class EditorFragment extends BaseFragment implements IEditorFragmentView, View.OnClickListener {
     public static final String FILE_PATH_KEY = "FILE_PATH_KEY";
 //    @Bind(R.id.title)
-    protected EditText mName;
+    protected EditText mNameEdit;
 //    @Bind(R.id.content)
     protected EditText mContent;
 
@@ -85,11 +84,10 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
 
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
-        mName = (EditText)getActivity().findViewById(R.id.title);
+        mNameEdit = (EditText)getActivity().findViewById(R.id.title_edit);
         mContent = (EditText)getActivity().findViewById(R.id.content);
 
-        Bundle arguments = getArguments();
-        String fileTemp = arguments.getString(FILE_PATH_KEY);
+        String fileTemp = getArguments().getString(FILE_PATH_KEY);
         if (fileTemp == null) {
             Toast.makeText(AppContext.context(), "Invalid path parameter", Toast.LENGTH_SHORT).show();
             return;
@@ -112,7 +110,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
             }
         };
 
-        mPerformNameEdit = new PerformEdit(mName) {
+        mPerformNameEdit = new PerformEdit(mNameEdit) {
             @Override
             protected void onTextChanged(Editable s) {
                 //文本改变
@@ -231,7 +229,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
                 mPerformEdit.redo();
                 return true;
             case R.id.action_save://保存
-                mPresenter.save(mName.getText().toString().trim(), mContent.getText().toString().trim());
+                mPresenter.save(mNameEdit.getText().toString().trim(), mContent.getText().toString().trim());
                 return true;
         }
 
@@ -240,7 +238,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
 
     private void shareMenu() {
         SystemUtils.hideSoftKeyboard(mContent);
-        if (mName.getText().toString().isEmpty()) {
+        if (mNameEdit.getText().toString().isEmpty()) {
             AppContext.showSnackbar(mContent, "Current title is empty");
             return;
         }
@@ -249,7 +247,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
             return;
         }
 
-        mPresenter.save(mName.getText().toString(), mContent.getText().toString());
+        mPresenter.save(mNameEdit.getText().toString(), mContent.getText().toString());
 
         BottomSheet.Builder builder = new BottomSheet.Builder(getActivity());
 //        builder.setTitle(R.string.bottom_sheet_title);
@@ -336,7 +334,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
     public void onEventMainThread(RxEvent event) {
         if (event.isType(RxEvent.TYPE_REFRESH_NOTIFY)) {
             //刷新markdown渲染
-            RxEventBus.getInstance().send(new RxEvent(RxEvent.TYPE_REFRESH_DATA, mName.getText().toString(), mContent.getText().toString()));
+            RxEventBus.getInstance().send(new RxEvent(RxEvent.TYPE_REFRESH_DATA, mNameEdit.getText().toString(), mContent.getText().toString()));
         }
     }
 
@@ -355,7 +353,7 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
         builder.setMessage("Exit without saving?");
         builder.setNegativeButton("Don't save", (dialog, which) -> getActivity().finish())
                 .setNeutralButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
-                .setPositiveButton("Save", (dialog, which) -> mPresenter.saveForExit(mName.getText().toString().trim(), mContent.getText().toString().trim(), true)).show();
+                .setPositiveButton("Save", (dialog, which) -> mPresenter.saveForExit(mNameEdit.getText().toString().trim(), mContent.getText().toString().trim(), true)).show();
     }
 
     @Override

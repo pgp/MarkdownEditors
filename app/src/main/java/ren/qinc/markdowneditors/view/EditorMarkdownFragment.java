@@ -21,9 +21,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
 
+import java.io.File;
+
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.base.BaseFragment;
 import ren.qinc.markdowneditors.event.RxEvent;
+import ren.qinc.markdowneditors.utils.FileUtils;
 import ren.qinc.markdowneditors.widget.MarkdownPreviewView;
 
 /**
@@ -31,15 +34,20 @@ import ren.qinc.markdowneditors.widget.MarkdownPreviewView;
  * Created by 沈钦赐 on 16/1/21.
  */
 public class EditorMarkdownFragment extends BaseFragment {
+    public File currentFilePath;
+
 //    @Bind(R.id.markdownView)
     protected MarkdownPreviewView mMarkdownPreviewView;
 //    @Bind(R.id.title)
-    protected TextView mName;
+    protected TextView mNameView;
     private String mContent;
 
-    public static EditorMarkdownFragment getInstance() {
-        EditorMarkdownFragment editorFragment = new EditorMarkdownFragment();
-        return editorFragment;
+    public static EditorMarkdownFragment getInstance(String filePath) {
+        EditorMarkdownFragment f = new EditorMarkdownFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(EditorFragment.FILE_PATH_KEY, filePath);
+        f.setArguments(bundle);
+        return f;
     }
 
 
@@ -56,7 +64,7 @@ public class EditorMarkdownFragment extends BaseFragment {
         if (event.isTypeAndData(RxEvent.TYPE_REFRESH_DATA)) {
             //页面还没有加载完成
             mContent = event.o[1].toString();
-            mName.setText(event.o[0].toString());
+            mNameView.setText(event.o[0].toString());
             if (isPageFinish)
                 mMarkdownPreviewView.parseMarkdown(mContent, true);
         }
@@ -69,8 +77,13 @@ public class EditorMarkdownFragment extends BaseFragment {
 
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
+        currentFilePath = new File(getArguments().getString(EditorFragment.FILE_PATH_KEY));
         mMarkdownPreviewView = (MarkdownPreviewView)getActivity().findViewById(R.id.markdownView);
-        mName = (TextView)getActivity().findViewById(R.id.title);
+        mNameView = (TextView)getActivity().findViewById(R.id.title);
+
+        // load file synchronously on first opening
+        mContent = FileUtils.readFile(currentFilePath);
+        mNameView.setText(FileUtils.fileNameNoExt(currentFilePath));
 
         mMarkdownPreviewView.setOnLoadingFinishListener(() -> {
             if (!isPageFinish && mContent != null)//
