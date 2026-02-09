@@ -17,9 +17,11 @@
 package ren.qinc.markdowneditors.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -59,6 +61,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected BaseApplication application;
     protected LayoutInflater inflater;
     protected Context mContext;
+
+    static {
+        // avoid messing up with content URIs
+        StrictMode.setVmPolicy(StrictMode.VmPolicy.LAX);
+    }
 
     /**
      * On create.
@@ -391,5 +398,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public static final int PICK_FILE_REQUEST = 1001;
+
+    public void openFilePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("text/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        startActivityForResult(Intent.createChooser(intent, "Select a text file"), PICK_FILE_REQUEST);
     }
 }

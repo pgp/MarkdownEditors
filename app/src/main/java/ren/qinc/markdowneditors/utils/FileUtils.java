@@ -305,7 +305,7 @@ public class FileUtils {
      * @param targetFile the target file
      * @return the boolean
      */
-    private static boolean copyFile(@NonNull File sourceFile, @NonNull File targetFile) {
+    public static boolean copyFile(@NonNull File sourceFile, @NonNull File targetFile) {
         if (!sourceFile.exists() || targetFile.exists()) {
             //原始文件不存在，目标文件已经存在
             return false;

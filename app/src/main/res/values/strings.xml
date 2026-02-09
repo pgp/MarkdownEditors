@@ -21,6 +21,7 @@
     <string name="serverurl">test</string>
     <string name="please_enter">please input</string>
     <string name="create_folder">Create Folder</string>
+    <string name="import1">Import document</string>
     <string name="about">about</string>
     <string name="action_copy">copy</string>
     <string name="action_create_file">create</string>
@@ -59,6 +60,6 @@
 
     <string name="app_name">Markdown Editor</string>
     <string name="copy_right">Copyright</string>
-    <string name="version_string">version_string</string>
+    <string name="version_string">Mod by PGP 2026–02–09</string>
     <string name="help">Help</string>
 </resources>

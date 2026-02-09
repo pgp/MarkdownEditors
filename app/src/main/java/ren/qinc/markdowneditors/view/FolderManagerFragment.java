@@ -44,6 +44,7 @@ import java.util.List;
 import ren.qinc.markdowneditors.R;
 import ren.qinc.markdowneditors.adapter.FileListAdapter;
 import ren.qinc.markdowneditors.adapter.OnItemClickLitener;
+import ren.qinc.markdowneditors.base.BaseActivity;
 import ren.qinc.markdowneditors.base.BaseApplication;
 import ren.qinc.markdowneditors.base.BaseRefreshFragment;
 import ren.qinc.markdowneditors.engine.ActionModeCallback;
@@ -385,6 +386,9 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
                 break;
             case R.id.action_create_file:
                 createNote();
+                break;
+            case R.id.action_import:
+                ((BaseActivity)getActivity()).openFilePicker();
                 break;
         }
         return super.onOptionsItemSelected(item);

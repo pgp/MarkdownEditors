@@ -41,5 +41,12 @@
         android:title="@string/create_folder"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_import"
+        android:icon="@android:drawable/ic_input_add"
+        android:orderInCategory="99"
+        android:title="@string/import1"
+        app:showAsAction="never"/>
+
 
 </menu>

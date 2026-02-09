@@ -16,14 +16,22 @@
 
 package ren.qinc.markdowneditors.base;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import java.io.File;
+
 import ren.qinc.markdowneditors.R;
+import ren.qinc.markdowneditors.event.RxEvent;
+import ren.qinc.markdowneditors.event.RxEventBus;
+import ren.qinc.markdowneditors.utils.ContentProviderUtils;
+import ren.qinc.markdowneditors.utils.FileUtils;
 import ren.qinc.markdowneditors.utils.SystemBarUtils;
 
 
@@ -99,6 +107,25 @@ public abstract class BaseDrawerLayoutActivity extends BaseToolbarActivity imple
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri fileUri = data.getData();
+            if (fileUri != null) {
+                String filePath = ContentProviderUtils.getPathFromUri(this, fileUri);  // Use URI string as "path"
+                importDocument(filePath);
+            }
+        }
+    }
+
+    public void importDocument(String filePath) {
+        File f = new File(filePath);
+        String name = FileUtils.fileNameNoExt(f);
+        if(FileUtils.copyFile(f, new File(getApplicationContext().getExternalFilesDir(null), name + ".md")))
+            RxEventBus.getInstance().send(new RxEvent(RxEvent.TYPE_REFRESH_FOLDER));
     }
 
 }
