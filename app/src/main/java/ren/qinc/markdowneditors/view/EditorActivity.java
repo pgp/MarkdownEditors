@@ -28,7 +28,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -45,6 +44,7 @@ import ren.qinc.markdowneditors.base.BaseToolbarActivity;
 import ren.qinc.markdowneditors.event.RxEvent;
 import ren.qinc.markdowneditors.event.RxEventBus;
 import ren.qinc.markdowneditors.lib.ExpandableLinearLayout;
+import ren.qinc.markdowneditors.lib.NonSwipeableViewPager;
 import ren.qinc.markdowneditors.presenter.IEditorActivityView;
 import ren.qinc.markdowneditors.utils.Check;
 import ren.qinc.markdowneditors.utils.FileUtils;
@@ -68,7 +68,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 //    @Bind(R.id.action_other_operate)
     protected ExpandableLinearLayout mExpandLayout;
 //    @Bind(R.id.pager)
-    protected ViewPager mViewPager;
+    protected NonSwipeableViewPager mViewPager;
     private TabIconView mTabIconView;
 
     @Override
@@ -79,7 +79,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
         mExpandLayout = (ExpandableLinearLayout)findViewById(R.id.action_other_operate);
-        mViewPager = (ViewPager)findViewById(R.id.pager);
+        mViewPager = (NonSwipeableViewPager)findViewById(R.id.pager);
 
         ViewCompat.setTransitionName(mViewPager, SHARED_ELEMENT_NAME);
 //        ViewCompat.setTransitionName(mViewPager, SHARED_ELEMENT_COLOR_NAME);
@@ -96,7 +96,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
     private void initViewPager() {
         mViewPager.setAdapter(new EditFragmentAdapter(getSupportFragmentManager()));
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new NonSwipeableViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
@@ -288,10 +288,10 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
                 mExpandLayout.toggle();
                 return true;
             case R.id.action_preview://预览
-                mViewPager.setCurrentItem(1, true);
+                mViewPager.setCurrentItem(0, true);
                 return true;
             case R.id.action_edit://编辑
-                mViewPager.setCurrentItem(0, true);
+                mViewPager.setCurrentItem(1, true);
                 return true;
             case R.id.action_helper:
                 CommonMarkdownActivity.startHelper(this);

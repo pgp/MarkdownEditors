@@ -23,5 +23,5 @@
         android:icon="@drawable/ic_action_preview_menu"
         android:orderInCategory="86"
         android:title="@string/action_edit"
-        app:showAsAction="never"/>
+        app:showAsAction="always"/>
 </menu>
