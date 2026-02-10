@@ -86,12 +86,14 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 //        mExpandLayout = (ExpandableLinearLayout) getLayoutInflater().inflate(R.layout.view_edit_operate, getAppBar(), false);
 //        getAppBar().addView(mExpandLayout);
 
-        getIntentData();
+        boolean newNote = getIntentData();
         mEditorFragment = EditorFragment.getInstance(currentFilePath);
         mEditorMarkdownFragment = EditorMarkdownFragment.getInstance(currentFilePath);
 
         initViewPager();
         initTab();
+
+        if(newNote) mViewPager.setCurrentItem(1);
     }
 
     private void initViewPager() {
@@ -224,25 +226,29 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
     public void initData() {
     }
 
-    private void getIntentData() {
+    // returns true on new note
+    private boolean getIntentData() {
         Intent intent = this.getIntent();
         int flags = intent.getFlags();
+        boolean newNote = false;
         if ((flags & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0) {
             if (intent.getAction() != null && Intent.ACTION_VIEW.equals(intent.getAction())) {
                 if (SCHEME_FILE.equals(intent.getScheme())) {
-                    //文件
+                    // document
                     String type = getIntent().getType();
                     // mImportingUri=file:///storage/emulated/0/Vlog.xml
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     Uri uri = intent.getData();
 
                     if (uri != null && SCHEME_FILE.equalsIgnoreCase(uri.getScheme())) {
-                        //这是一个文件
+                        // this is a file
                         currentFilePath = FileUtils.uri2FilePath(getBaseContext(), uri);
+                        if(!currentFilePath.endsWith(".md")) newNote = true; // or alternatively, if new File(currentFilePath).isDirectory()
                     }
                 }
             }
         }
+        return newNote;
     }
 
     @NonNull
