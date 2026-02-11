@@ -84,18 +84,4 @@ public class ViewUtils {
         return location;
     }
 
-    public static void startActivity(Intent intent, Activity activity,
-                                     View sharedElement, String sharedElementName) {
-        ActivityOptionsCompat optionsCompat
-                = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                activity, sharedElement, sharedElementName);
-        try {
-            ActivityCompat.startActivity(activity, intent,
-                    optionsCompat.toBundle());
-            //界面共享该图片元素
-        } catch (IllegalArgumentException e) {
-            activity.startActivity(intent);//如果异常 直接启动
-        }
-    }
-
 }

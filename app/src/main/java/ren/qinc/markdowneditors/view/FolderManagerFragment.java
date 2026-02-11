@@ -286,18 +286,17 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             return;
         }
 
-        //非编辑模式下
-        if (fileBean.isDirectory) {//Folder
+        // Non-editing mode
+        if (fileBean.isDirectory) { // Folder
             mPresenter.enterFolder(fileBean.absPath);
-        } else {//文件
+        }
+        else { // Document
             Intent intent = new Intent(mContext, EditorActivity.class);
             intent.setAction(Intent.ACTION_VIEW);
-            //设置数据URI与数据类型匹配
+            // Configure data URIs to match data types
             intent.setDataAndType(Uri.fromFile(new File(fileBean.absPath)), "file");
-            ViewUtils.startActivity(intent, getActivity(), view, EditorActivity.SHARED_ELEMENT_NAME);
+            getActivity().startActivity(intent);
         }
-
-
     }
 
     @Override
